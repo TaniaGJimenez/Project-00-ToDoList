@@ -4,6 +4,21 @@ const addTaskBtn = document.querySelector("#addTask");
 const taskList = document.querySelector("#taskList");
 let taskListStorage = [];
 
+//Función para cargar datos desde el localStorage
+function loadTasksFromLocalStorage(){
+    const taskListJson = localStorage.getItem("taskListJson");
+    if(taskListJson){
+        taskListStorage = JSON.parse(taskListJson);
+        taskListStorage.forEach(taskText =>{
+            const taskItem = `<li class="itemList">${taskText}<i class="trashBtn fa-regular fa-trash-can"></i></li>`;
+            taskList.innerHTML += taskItem;
+        });
+    }
+}
+
+//Invocamos la función al cargar la página
+loadTasksFromLocalStorage();
+
 //Función que agrega tarea
 
 function addTask(e) {
