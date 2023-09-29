@@ -20,10 +20,25 @@ function addTask(e) {
 }
 //Creamos eventos
 addTaskBtn.addEventListener("click", addTask);
-taskList.addEventListener("click", (e) => {
-    //Evalúa si el botón tiene una clase trashBtn
-    if(e.target.classList.contains("trashBtn")) {
-        e.target.parentElement.remove();
-        
+taskList.addEventListener("click", deleteTask);
+
+//Agrega tarea con tecla Enter
+newTaskInput.addEventListener("keypress", (e) => {
+    if (e.key === "Enter") {
+        e.preventDefault();
+        addTask(e);
     }
 });
+
+// Función para eliminar una tarea y eliminarla del localStorage
+function deleteTask(e) {
+    if (e.target.classList.contains("trashBtn")) {
+        const taskText = e.target.parentElement.textContent;
+        const index = taskListStorage.indexOf(taskText);
+        if (index !== -1) {
+            taskListStorage.splice(index, 1);
+            localStorage.setItem("taskListJson", JSON.stringify(taskListStorage));
+        }
+        e.target.parentElement.remove();
+    }
+}
