@@ -10,7 +10,7 @@ function addTask(e) {
     e.preventDefault();
     const taskText = newTaskInput.value.trim();
     if(taskText) {
-        const taskItem = `<li class="itemList">${taskText}<button class="trashBtn">Delete</button></li>`;
+        const taskItem = `<li class="itemList">${taskText}<i class="trashBtn fa-regular fa-trash-can"></i></li>`;
         taskList.innerHTML += taskItem;
         newTaskInput.value = "";
         taskListStorage.push(taskText);
